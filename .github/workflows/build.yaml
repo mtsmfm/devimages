@@ -20,7 +20,7 @@ jobs:
             tag: node-14
           - image: node:12.22.4-buster
             tag: node-12
-          - image: ruby:3.0.1-buster
+          - image: ruby:3.0.2-buster
             tag: ruby-3-0
           - image: ruby:2.7.3-buster
             tag: ruby-2-7
