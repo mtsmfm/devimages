@@ -1,0 +1,11 @@
+{
+  "regexManagers": [
+    {
+      "fileMatch": ["^\\.github/workflows/build\\.yaml$"],
+      "matchStrings": [
+        "image: (?<depName>.*?):(?<currentValue>.*)\\s"
+      ],
+      "datasourceTemplate": "docker"
+    }
+  ]
+}
