@@ -1,0 +1,16 @@
+{
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["major", "minor"],
+      "enabled": false
+    }
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": ["^\\.github/workflows/build\\.yaml$"],
+      "matchStrings": ["image: (?<depName>.*?):(?<currentValue>.*)\\s"],
+      "datasourceTemplate": "docker"
+    }
+  ],
+  "recreateClosed": true
+}
