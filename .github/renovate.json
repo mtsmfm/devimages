@@ -3,6 +3,10 @@
     {
       "matchUpdateTypes": ["major", "minor"],
       "enabled": false
+    },
+    {
+      "matchFiles": ["^\\.github/workflows/build\\.yaml$"],
+      "automerge": true
     }
   ],
   "regexManagers": [
