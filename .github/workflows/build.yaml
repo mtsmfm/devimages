@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - image: node:16.6.1-buster
+          - image: node:16.6.2-buster
             tag: node-16
           - image: node:14.17.4-buster
             tag: node-14
