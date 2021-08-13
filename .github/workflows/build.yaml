@@ -16,7 +16,7 @@ jobs:
         include:
           - image: node:16.6.2-buster
             tag: node-16
-          - image: node:14.17.4-buster
+          - image: node:14.17.5-buster
             tag: node-14
           - image: node:12.22.4-buster
             tag: node-12
