@@ -13,12 +13,9 @@ function main() {
     if [ -w /etc/passwd ]; then
       echo "${user_name}:x:$(id -u):0:${user_name} user:${HOME}:/bin/bash" >> /etc/passwd
       echo "${user_name}:x:$(id -u):" >> /etc/group
-      echo "${user_name}:!:$($(date +%s)/86400):0:99999:7:::" >> /etc/shadow
-    fi
-
-    if [ -d /etc/sudoers.d ]; then
-      echo user ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${user_name}
-      chmod 0440 /etc/sudoers.d/${user_name}
+      sed -E "s/sudo:x:([0-9]+):/sudo:x:\1:${user_name}/" /etc/group > /tmp/group
+      cp /tmp/group /etc/group
+      echo "${user_name}:!:$(expr $(date +%s) / 86400):0:99999:7:::" >> /etc/shadow
     fi
   fi
 
