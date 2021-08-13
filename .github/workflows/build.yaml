@@ -1,8 +1,12 @@
 on:
   pull_request:
+    paths:
+      - images/**
     branches:
       - main
   push:
+    paths:
+      - images/**
     branches:
       - main
 
