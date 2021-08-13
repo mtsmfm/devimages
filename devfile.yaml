@@ -9,7 +9,10 @@ projects:
 components:
   - id: esbenp/prettier-vscode/latest
     type: chePlugin
-  - type: dockerimage
-    alias: ruby
-    image: ghcr.io/mtsmfm/devfiles:ruby-3-0--main
+  - mountSources: true
     memoryLimit: 4Gi
+    type: dockerimage
+    alias: ruby
+    image: 'ghcr.io/mtsmfm/devfiles:ruby-3-0--main'
+  - id: redhat/vscode-yaml/latest
+    type: chePlugin
