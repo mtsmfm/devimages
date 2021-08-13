@@ -21,7 +21,7 @@ function main() {
     git clone https://github.com/$CHE_WORKSPACE_NAMESPACE/dotfiles ~/dotfiles
     ~/dotfiles/install
   else
-    git clone git://github.com/ohmybash/oh-my-bash.git ~/.oh-my-bash
+    git clone git://github.com/ohmybash/oh-my-bash.git ~/.oh-my-bash --depth 1
     cp ~/.oh-my-bash/templates/bashrc.osh-template ~/.bashrc
   fi
 }
