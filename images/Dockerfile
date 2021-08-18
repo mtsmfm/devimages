@@ -12,6 +12,7 @@ RUN mkdir -p /home/user && \
   chmod +x /entrypoint.sh
 
 ENV HOME /home/user
+ENV LANG C.UTF-8
 WORKDIR /projects
 
 ENTRYPOINT ["/entrypoint.sh"]
