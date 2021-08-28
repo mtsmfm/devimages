@@ -2,11 +2,13 @@ on:
   pull_request:
     paths:
       - images/**
+      - .github/workflows/build-and-push.yaml
     branches:
       - main
   push:
     paths:
       - images/**
+      - .github/workflows/build-and-push.yaml
     branches:
       - main
 
@@ -30,6 +32,8 @@ jobs:
             tag: ruby-2-7
           - image: ruby:2.6.7-buster
             tag: ruby-2-6
+          - image: rust:1.54.0-buster
+            tag: rust
     steps:
       - uses: actions/checkout@v2
       - id: meta
