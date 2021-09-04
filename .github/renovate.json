@@ -5,7 +5,7 @@
       "enabled": false
     },
     {
-      "matchFiles": ["^bin/generate_dockerfiles$"],
+      "matchFiles": ["^bin/generate_dockerfiles$", "^images/.*"],
       "automerge": true
     }
   ],
