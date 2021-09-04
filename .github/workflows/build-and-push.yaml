@@ -19,21 +19,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - image: node:16.6.2-buster
-            tag: node-16
-          - image: node:14.17.5-buster
-            tag: node-14
-          - image: node:12.22.5-buster
-            tag: node-12
-          - image: ruby:3.0.2-buster
-            tag: ruby-3-0
-          - image: ruby:2.7.4-buster
-            tag: ruby-2-7
-          - image: ruby:2.6.7-buster
-            tag: ruby-2-6
-          - image: rust:1.54.0-buster
-            tag: rust
+        tag:
+          - node-16
+          - node-14
+          - node-12
+          - ruby-3-0
+          - ruby-2-7
+          - ruby-2-6
+          - rust
     steps:
       - uses: actions/checkout@v2
       - id: meta
@@ -54,10 +47,8 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - uses: docker/build-push-action@v2
         with:
-          context: images
+          context: images/${{ matrix.tag }}
           platforms: linux/amd64
-          build-args: |
-            FROM_IMAGE=${{ matrix.image }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
