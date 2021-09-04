@@ -5,16 +5,19 @@
       "enabled": false
     },
     {
-      "matchFiles": ["^\\.github/workflows/build\\.yaml$"],
+      "matchFiles": ["^bin/generate_dockerfiles$"],
       "automerge": true
     }
   ],
   "regexManagers": [
     {
-      "fileMatch": ["^\\.github/workflows/build\\.yaml$"],
-      "matchStrings": ["image: (?<depName>.*?):(?<currentValue>.*)\\s"],
+      "fileMatch": ["^bin/generate_dockerfiles$"],
+      "matchStrings": ["image: '(?<depName>.*?):(?<currentValue>.*)'"],
       "datasourceTemplate": "docker"
     }
   ],
-  "recreateClosed": true
+  "recreateClosed": true,
+  "postUpgradeTasks": {
+    "commands": ["bin/generate_dockerfiles"]
+  }
 }
