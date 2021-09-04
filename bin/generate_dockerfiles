@@ -11,7 +11,7 @@ erb = ERB.new(DATA.read)
 
 [
   {tag: 'node-16', image: 'node:16.6.2-buster'},
-  {tag: 'node-14', image: 'node:14.17.5-buster'},
+  {tag: 'node-14', image: 'node:14.17.6-buster'},
   {tag: 'node-12', image: 'node:12.22.5-buster'},
   {tag: 'ruby-3-0', image: 'ruby:3.0.2-buster'},
   {tag: 'ruby-2-7', image: 'ruby:2.7.4-buster'},
