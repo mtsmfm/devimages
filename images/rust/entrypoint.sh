@@ -19,7 +19,9 @@ function main() {
 
   if curl --fail -I https://github.com/$CHE_WORKSPACE_NAMESPACE/dotfiles; then
     git clone https://github.com/$CHE_WORKSPACE_NAMESPACE/dotfiles ~/dotfiles
-    ~/dotfiles/install
+    if [ -f ~/dotfiles/install ]; then
+      ~/dotfiles/install
+    fi
   else
     git clone git://github.com/ohmybash/oh-my-bash.git ~/.oh-my-bash --depth 1
     cp ~/.oh-my-bash/templates/bashrc.osh-template ~/.bashrc
