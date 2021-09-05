@@ -7,7 +7,7 @@ require 'pathname'
 root_dir = Pathname.new(__dir__).join('..')
 images_dir = root_dir.join('images')
 
-erb = ERB.new(DATA.read)
+erb = ERB.new(DATA.read, trim_mode: '-')
 
 [
   {tag: 'node-16', image: 'node:16.6.2-buster'},
@@ -17,6 +17,7 @@ erb = ERB.new(DATA.read)
   {tag: 'ruby-2-7', image: 'ruby:2.7.4-buster'},
   {tag: 'ruby-2-6', image: 'ruby:2.6.7-buster'},
   {tag: 'rust', image: 'rust:1.54.0-buster'},
+  {tag: 'docker', image: 'debian:10.10'},
 ].each do |x|
   tag = x[:tag]
   image = x[:image]
@@ -39,6 +40,13 @@ RUN apt-get update && apt-get install -y sudo less wget
 ENV KUBECTL_VERSION v1.22.1
 RUN wget https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl -O /usr/bin/kubectl && chmod +x /usr/bin/kubectl
 
+<%- if tag == 'docker' -%>
+ENV DOCKER_CLI_VERSION 20.10.8
+RUN wget -O- https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_CLI_VERSION.tgz | tar xzv -C /tmp \
+  && mv /tmp/docker/docker /usr/bin/docker \
+  && rm -rf /tmp/docker
+
+<%- end -%>
 RUN echo "ALL ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 COPY --chown=0:0 entrypoint.sh /
