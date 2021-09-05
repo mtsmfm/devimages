@@ -28,6 +28,9 @@ function main() {
     git clone git://github.com/ohmybash/oh-my-bash.git ~/.oh-my-bash --depth 1
     cp ~/.oh-my-bash/templates/bashrc.osh-template ~/.bashrc
   fi
+  Xvfb :0 -screen 0 ${XVFB_SCREEN_WHD:-1280x800x24} &
+  x11vnc -forever -shared -noxrecord &
+  /novnc/novnc/utils/novnc_proxy --vnc localhost:5900 --listen ${NOVNC_LISTEN_PORT:-6080}
 }
 
 main
