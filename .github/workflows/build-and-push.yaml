@@ -27,6 +27,7 @@ jobs:
           - ruby-2-7
           - ruby-2-6
           - rust
+          - docker
     steps:
       - uses: actions/checkout@v2
       - id: meta
