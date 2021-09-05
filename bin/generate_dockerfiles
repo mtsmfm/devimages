@@ -9,20 +9,33 @@ images_dir = root_dir.join('images')
 
 erb = ERB.new(DATA.read, trim_mode: '-')
 
-[
+node_images = [
   {tag: 'node-16', image: 'node:16.6.2-buster'},
   {tag: 'node-14', image: 'node:14.17.6-buster'},
   {tag: 'node-12', image: 'node:12.22.6-buster'},
+]
+
+ruby_images = [
   {tag: 'ruby-3-0', image: 'ruby:3.0.2-buster'},
   {tag: 'ruby-2-7', image: 'ruby:2.7.4-buster'},
   {tag: 'ruby-2-6', image: 'ruby:2.6.7-buster'},
+]
+
+[
+  *node_images,
+  *ruby_images,
+  *ruby_images.product(node_images).map {|ruby, node|
+    ruby.merge(tag: ruby[:tag] + '--' + node[:tag], node_version: node[:tag].match(/\d+/)[0].to_i)
+  },
   {tag: 'rust', image: 'rust:1.54.0-buster'},
   {tag: 'docker', image: 'debian:10.10'},
 ].each do |x|
   tag = x[:tag]
   image = x[:image]
+  node_version = x[:node_version]
 
   dir = images_dir.join(tag)
+  FileUtils.mkdir_p(dir)
   dir.join('Dockerfile').write(erb.result(binding))
 end
 
@@ -37,6 +50,11 @@ FROM <%= image %>
 
 RUN apt-get update && apt-get install -y sudo less wget
 
+<%- if node_version -%>
+RUN apt-get update && curl -fsSL https://deb.nodesource.com/setup_<%= node_version %>.x | bash - \
+  && apt-get install -y nodejs
+
+<%- end -%>
 ENV KUBECTL_VERSION v1.22.1
 RUN wget https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl -O /usr/bin/kubectl && chmod +x /usr/bin/kubectl
 
