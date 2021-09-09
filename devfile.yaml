@@ -16,3 +16,29 @@ components:
     image: 'ghcr.io/mtsmfm/devfiles:ruby-3-0--main'
   - id: redhat/vscode-yaml/latest
     type: chePlugin
+  - mountSources: true
+    memoryLimit: 4Gi
+    type: dockerimage
+    alias: docker-client
+    image: 'ghcr.io/mtsmfm/devfiles:docker--main'
+    env:
+      - value: localhost
+        name: DOCKER_HOST
+  - referenceContent: |
+      kind: List
+      items:
+        - apiVersion: v1
+          kind: Pod
+          metadata:
+            name: docker
+          spec:
+            containers:
+              - name: dockerd
+                image: docker:dind
+                securityContext:
+                  runAsUser: 0
+                  privileged: true
+                env:
+                  - name: DOCKER_TLS_CERTDIR
+                    value: ""
+    type: kubernetes
