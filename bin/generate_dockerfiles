@@ -19,7 +19,7 @@ node_images = [
 ruby_images = [
   {tag: 'ruby-3-0', image: 'ruby:3.0.2-buster'},
   {tag: 'ruby-2-7', image: 'ruby:2.7.4-buster'},
-  {tag: 'ruby-2-6', image: 'ruby:2.6.7-buster'},
+  {tag: 'ruby-2-6', image: 'ruby:2.6.8-buster'},
 ]
 
 [
