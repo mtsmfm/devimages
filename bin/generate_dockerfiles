@@ -11,15 +11,15 @@ dockerfile_erb = ERB.new(images_dir.join('Dockerfile.erb').read, trim_mode: '-')
 entrypoint_erb = ERB.new(images_dir.join('entrypoint.sh.erb').read, trim_mode: '-')
 
 node_images = [
-  {tag: 'node-16', image: 'node:16.6.2-buster'},
-  {tag: 'node-14', image: 'node:14.17.6-buster'},
-  {tag: 'node-12', image: 'node:12.22.6-buster'},
+  {tag: 'node-16', image: 'node:16.6.2-bullseye'},
+  {tag: 'node-14', image: 'node:14.17.6-bullseye'},
+  {tag: 'node-12', image: 'node:12.22.6-bullseye'},
 ]
 
 ruby_images = [
-  {tag: 'ruby-3-0', image: 'ruby:3.0.2-buster'},
-  {tag: 'ruby-2-7', image: 'ruby:2.7.4-buster'},
-  {tag: 'ruby-2-6', image: 'ruby:2.6.8-buster'},
+  {tag: 'ruby-3-0', image: 'ruby:3.0.2-bullseye'},
+  {tag: 'ruby-2-7', image: 'ruby:2.7.4-bullseye'},
+  {tag: 'ruby-2-6', image: 'ruby:2.6.8-bullseye'},
 ]
 
 [
@@ -31,8 +31,8 @@ ruby_images = [
   *node_images.map {|node|
     node.merge(tag: 'cypress--' + node[:tag], cypress: true)
   },
-  {tag: 'rust', image: 'rust:1.54.0-buster'},
-  {tag: 'docker', image: 'debian:10.10'},
+  {tag: 'rust', image: 'rust:1.54.0-bullseye'},
+  {tag: 'docker', image: 'debian:11.0'},
 ].each do |x|
   tag = x[:tag]
   image = x[:image]
