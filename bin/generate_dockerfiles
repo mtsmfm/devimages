@@ -11,7 +11,7 @@ dockerfile_erb = ERB.new(images_dir.join('Dockerfile.erb').read, trim_mode: '-')
 entrypoint_erb = ERB.new(images_dir.join('entrypoint.sh.erb').read, trim_mode: '-')
 
 node_images = [
-  {tag: 'node-16', image: 'node:16.6.2-bullseye'},
+  {tag: 'node-16', image: 'node:16.9.0-bullseye'},
   {tag: 'node-14', image: 'node:14.17.6-bullseye'},
   {tag: 'node-12', image: 'node:12.22.6-bullseye'},
 ]
