@@ -3,6 +3,9 @@
 require 'erb'
 require 'fileutils'
 require 'pathname'
+require 'logger'
+
+logger = Logger.new(STDOUT)
 
 root_dir = Pathname.new(__dir__).join('..')
 images_dir = root_dir.join('images')
@@ -10,37 +13,41 @@ images_dir = root_dir.join('images')
 dockerfile_erb = ERB.new(images_dir.join('Dockerfile.erb').read, trim_mode: '-')
 entrypoint_erb = ERB.new(images_dir.join('entrypoint.sh.erb').read, trim_mode: '-')
 
+FileUtils.rm_rf(images_dir.glob('*').select(&:directory?))
+
 node_images = [
-  {tag: 'node-16', image: 'node:16.9.0-bullseye'},
-  {tag: 'node-14', image: 'node:14.17.6-bullseye'},
-  {tag: 'node-12', image: 'node:12.22.6-bullseye'},
+  {name: 'node', version: '16', base_image: 'node:16.9.0-bullseye'},
+  {name: 'node', version: '14', base_image: 'node:14.17.6-bullseye'},
+  {name: 'node', version: '12', base_image: 'node:12.22.6-bullseye'},
 ]
 
 ruby_images = [
-  {tag: 'ruby-3-0', image: 'ruby:3.0.2-bullseye'},
-  {tag: 'ruby-2-7', image: 'ruby:2.7.4-bullseye'},
-  {tag: 'ruby-2-6', image: 'ruby:2.6.8-bullseye'},
+  {name: 'ruby', version: '3.0', base_image: 'ruby:3.0.2-bullseye'},
+  {name: 'ruby', version: '2.7', base_image: 'ruby:2.7.4-bullseye'},
+  {name: 'ruby', version: '2.6', base_image: 'ruby:2.6.8-bullseye'},
 ]
 
 [
   *node_images,
   *ruby_images,
   *ruby_images.product(node_images).map {|ruby, node|
-    ruby.merge(tag: ruby[:tag] + '--' + node[:tag], node_version: node[:tag].match(/\d+/)[0].to_i)
+    ruby.merge(tag: ruby[:version] + '-node-' + node[:version], node_version: node[:version])
   },
   *node_images.map {|node|
-    node.merge(tag: 'cypress--' + node[:tag], cypress: true)
+    node.merge(name: 'cypress', tag: 'node-' + node[:version])
   },
-  {tag: 'rust', image: 'rust:1.55.0-bullseye'},
-  {tag: 'golang', image: 'golang:1.17.1-bullseye'},
-  {tag: 'docker', image: 'debian:11.0'},
+  {name: 'rust', base_image: 'rust:1.55.0-bullseye'},
+  {name: 'golang', base_image: 'golang:1.17.1-bullseye'},
+  {name: 'docker', base_image: 'debian:11.0'},
 ].each do |x|
-  tag = x[:tag]
-  image = x[:image]
-  node_version = x[:node_version]
-  cypress = x[:cypress]
+  logger.info("Processing #{x.inspect}")
 
-  dir = images_dir.join(tag)
+  name = x[:name]
+  tag = x[:tag] || x[:version]
+  base_image = x[:base_image]
+  node_version = x[:node_version]
+
+  dir = tag ? images_dir.join(name, tag) : images_dir.join(name)
   FileUtils.mkdir_p(dir)
   dir.join('Dockerfile').write(dockerfile_erb.result(binding))
   dir.join('entrypoint.sh').write(entrypoint_erb.result(binding))
