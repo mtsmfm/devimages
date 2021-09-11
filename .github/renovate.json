@@ -1,7 +1,12 @@
 {
   "packageRules": [
     {
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
       "matchUpdateTypes": ["major", "minor"],
+      "matchPackageNames": ["ruby"],
       "enabled": false
     },
     {
