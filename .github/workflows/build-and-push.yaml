@@ -13,34 +13,25 @@ on:
       - main
 
 jobs:
+  generate-matrix:
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v2
+      - id: set-matrix
+        run: |
+          print '::set-output name=matrix::' + {image: Pathname.glob('images/*').select(&:directory?).map(&:basename)}.to_json
+        shell: ruby -r json -r pathname {0}
   build:
     timeout-minutes: 20
     runs-on: ubuntu-latest
+    needs:
+      - generate-matrix
     strategy:
       fail-fast: false
-      matrix:
-        image:
-          - docker
-          - cypress--node-12
-          - cypress--node-14
-          - cypress--node-16
-          - golang
-          - node-12
-          - node-14
-          - node-16
-          - ruby-2-6
-          - ruby-2-6--node-12
-          - ruby-2-6--node-14
-          - ruby-2-6--node-16
-          - ruby-2-7
-          - ruby-2-7--node-12
-          - ruby-2-7--node-14
-          - ruby-2-7--node-16
-          - ruby-3-0
-          - ruby-3-0--node-12
-          - ruby-3-0--node-14
-          - ruby-3-0--node-16
-          - rust
+      matrix: ${{ fromJson(needs.generate-matrix.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v2
       - id: meta
