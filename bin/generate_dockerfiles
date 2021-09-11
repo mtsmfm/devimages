@@ -31,7 +31,7 @@ ruby_images = [
   *node_images.map {|node|
     node.merge(tag: 'cypress--' + node[:tag], cypress: true)
   },
-  {tag: 'rust', image: 'rust:1.54.0-bullseye'},
+  {tag: 'rust', image: 'rust:1.55.0-bullseye'},
   {tag: 'golang', image: 'golang:1.17.1-bullseye'},
   {tag: 'docker', image: 'debian:11.0'},
 ].each do |x|
