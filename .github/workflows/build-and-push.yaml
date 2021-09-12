@@ -22,8 +22,12 @@ jobs:
       - uses: actions/checkout@v2
       - id: set-matrix
         run: |
-          matrix = Pathname.glob('images/*/Dockerfile').map {|f| {image: f.parent.basename, prefix: '', latest: '', context: f.parent} }
-          matrix += Pathname.glob('images/*/*/Dockerfile').map {|f| {image: f.parent.parent.basename, prefix: "#{f.parent.basename}--", latest: f.parent.basename, context: f.parent} }
+          matrix = Pathname.glob('images/*/Dockerfile').map {|f|
+            {image: f.parent.basename, prefix: '', raw: ENV['GITHUB_REF'] == 'refs/heads/main' ? 'latest' : '', context: f.parent}
+          }
+          matrix += Pathname.glob('images/*/*/Dockerfile').map {|f|
+            {image: f.parent.parent.basename, prefix: "#{f.parent.basename}--", raw: ENV['GITHUB_REF'] == 'refs/heads/main' ? f.parent.basename : '', context: f.parent}
+          }
           print '::set-output name=matrix::' + {include: matrix}.to_json
         shell: ruby -r json -r pathname {0}
   build:
@@ -41,10 +45,8 @@ jobs:
         with:
           images: |
             ghcr.io/${{ github.repository }}/${{ matrix.image }}
-          flavor: |
-            latest=auto
-            prefix=${{ matrix.latest }},onlatest=true
           tags: |
+            ${{ matrix.raw }}
             type=ref,event=branch,prefix=${{ matrix.prefix }}
             type=ref,event=pr,prefix=${{ matrix.prefix }}pr-
             type=sha,prefix=${{ matrix.prefix }}sha-
