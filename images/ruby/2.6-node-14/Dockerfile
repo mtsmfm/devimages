@@ -10,7 +10,7 @@ RUN apt-get update && curl -fsSL https://deb.nodesource.com/setup_14.x | bash - 
 ENV KUBECTL_VERSION v1.22.1
 RUN wget https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl -O /usr/bin/kubectl && chmod +x /usr/bin/kubectl
 
-RUN wget https://github.com/mtsmfm/che-cli/releases/download/0.2.0/che-cli-0.2.0-linux-amd64.tar.gz | tar -xzv -C /usr/bin && mv /usr/bin/che-cli /usr/bin/che
+RUN wget -O- https://github.com/mtsmfm/che-cli/releases/download/0.2.0/che-cli-0.2.0-linux-amd64.tar.gz | tar -xzv -C /usr/bin && mv /usr/bin/che-cli /usr/bin/che
 
 RUN echo "ALL ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
