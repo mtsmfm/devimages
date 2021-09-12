@@ -13,14 +13,14 @@ components:
     memoryLimit: 4Gi
     type: dockerimage
     alias: ruby
-    image: 'ghcr.io/mtsmfm/devfiles:ruby-3-0--main'
+    image: "ghcr.io/mtsmfm/devfiles/ruby:3.0"
   - id: redhat/vscode-yaml/latest
     type: chePlugin
   - mountSources: true
     memoryLimit: 4Gi
     type: dockerimage
     alias: docker-client
-    image: 'ghcr.io/mtsmfm/devfiles:docker--main'
+    image: "ghcr.io/mtsmfm/devfiles/docker"
     env:
       - value: localhost
         name: DOCKER_HOST
