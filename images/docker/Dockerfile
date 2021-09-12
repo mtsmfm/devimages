@@ -7,11 +7,6 @@ RUN apt-get update && apt-get install -y sudo less wget curl git
 ENV KUBECTL_VERSION v1.22.1
 RUN wget https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl -O /usr/bin/kubectl && chmod +x /usr/bin/kubectl
 
-ENV DOCKER_CLI_VERSION 20.10.8
-RUN wget -O- https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_CLI_VERSION.tgz | tar xzv -C /tmp \
-  && mv /tmp/docker/docker /usr/bin/docker \
-  && rm -rf /tmp/docker
-
 RUN echo "ALL ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 COPY --chown=0:0 entrypoint.sh /
