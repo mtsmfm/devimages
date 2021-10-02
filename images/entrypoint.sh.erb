@@ -22,7 +22,7 @@ function main() {
   if curl --fail -I https://github.com/$CHE_WORKSPACE_NAMESPACE/dotfiles; then
     git clone https://github.com/$CHE_WORKSPACE_NAMESPACE/dotfiles ~/dotfiles
     if [ -f ~/dotfiles/install ]; then
-      ~/dotfiles/install
+      ~/dotfiles/install || true
     fi
   else
     git clone git://github.com/ohmybash/oh-my-bash.git ~/.oh-my-bash --depth 1
