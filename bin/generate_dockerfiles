@@ -39,7 +39,7 @@ ruby_images = [
   {name: 'rust', base_image: 'rust:1.55.0-bullseye'},
   {name: 'golang', base_image: 'golang:1.17.2-bullseye'},
   {name: 'clojure', base_image: 'clojure:openjdk-11-lein-2.9.6-bullseye'},
-  {name: 'docker', base_image: 'debian:11.0'},
+  {name: 'docker', base_image: 'debian:11.1'},
 ].each do |x|
   logger.info("Processing #{x.inspect}")
 
