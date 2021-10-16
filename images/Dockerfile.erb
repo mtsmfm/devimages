@@ -33,6 +33,9 @@ RUN wget -O - https://github.com/novnc/websockify/archive/v${WEBSOCKIFY_VERSION}
 
 ENV DISPLAY :0
 <%- end -%>
+<%- if name == 'qmk' -%>
+RUN apt-get update && apt-get install -y python3-pip && python3 -m pip install qmk && qmk setup -H /home/user/qmk_firmware -y
+<%- end -%>
 ENV KUBECTL_VERSION v1.22.1
 RUN wget https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl -O /usr/bin/kubectl && chmod +x /usr/bin/kubectl
 
