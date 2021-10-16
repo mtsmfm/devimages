@@ -22,6 +22,7 @@ A collection of Devfiles and docker images for eclipse che.
 - ghcr.io/mtsmfm/devfiles/ruby:3.0-node-12
 - ghcr.io/mtsmfm/devfiles/ruby:3.0-node-14
 - ghcr.io/mtsmfm/devfiles/ruby:3.0-node-16
+- ghcr.io/mtsmfm/devfiles/clojure
 - ghcr.io/mtsmfm/devfiles/docker
 - ghcr.io/mtsmfm/devfiles/golang
 - ghcr.io/mtsmfm/devfiles/rust
