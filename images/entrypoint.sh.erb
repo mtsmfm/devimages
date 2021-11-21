@@ -19,6 +19,8 @@ function main() {
     fi
   fi
 
+  sudo chown -R $(id -u) "${HOME}"
+
   if [ -n "$CHE_WORKSPACE_NAMESPACE" ]; then
     if curl --fail -I https://github.com/$CHE_WORKSPACE_NAMESPACE/dotfiles; then
       git clone https://github.com/$CHE_WORKSPACE_NAMESPACE/dotfiles ~/dotfiles
