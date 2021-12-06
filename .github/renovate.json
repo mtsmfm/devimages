@@ -1,28 +1,43 @@
 {
   "packageRules": [
     {
-      "matchUpdateTypes": ["major"],
+      "matchUpdateTypes": [
+        "major"
+      ],
       "enabled": false
     },
     {
-      "matchUpdateTypes": ["major", "minor"],
-      "matchPackageNames": ["ruby"],
+      "matchUpdateTypes": [
+        "major",
+        "minor"
+      ],
+      "matchPackageNames": [
+        "ruby"
+      ],
       "enabled": false
     },
     {
-      "matchFiles": ["^bin/generate_dockerfiles$", "^images/.*"],
+      "matchDatasources": [
+        "docker"
+      ],
       "automerge": true
     }
   ],
   "regexManagers": [
     {
-      "fileMatch": ["^bin/generate_dockerfiles$"],
-      "matchStrings": ["image: '(?<depName>.*?):(?<currentValue>.*)'"],
+      "fileMatch": [
+        "^bin/generate_dockerfiles$"
+      ],
+      "matchStrings": [
+        "image: '(?<depName>.*?):(?<currentValue>.*)'"
+      ],
       "datasourceTemplate": "docker"
     }
   ],
   "recreateClosed": true,
   "postUpgradeTasks": {
-    "commands": ["bin/generate_dockerfiles"]
+    "commands": [
+      "bin/generate_dockerfiles"
+    ]
   }
 }
