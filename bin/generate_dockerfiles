@@ -22,7 +22,7 @@ node_images = [
 ]
 
 ruby_images = [
-  {name: 'ruby', version: '3.0', base_image: 'ruby:3.0.2-bullseye'},
+  {name: 'ruby', version: '3.0', base_image: 'ruby:3.0.3-bullseye'},
   {name: 'ruby', version: '2.7', base_image: 'ruby:2.7.4-bullseye'},
   {name: 'ruby', version: '2.6', base_image: 'ruby:2.6.8-bullseye'},
 ]
