@@ -23,10 +23,10 @@ jobs:
       - id: set-matrix
         run: |
           matrix = Pathname.glob('images/*/Dockerfile').map {|f|
-            {image: f.parent.basename, prefix: '', raw: ENV['GITHUB_REF'] == 'refs/heads/main' ? 'latest' : '', context: f.parent}
+            {image: f.parent.basename, prefix: '', raw: ENV['GITHUB_REF'] == 'refs/heads/main' ? 'latest' : '', context: f.parent, latest: 'latest'}
           }
           matrix += Pathname.glob('images/*/*/Dockerfile').map {|f|
-            {image: f.parent.parent.basename, prefix: "#{f.parent.basename}--", raw: ENV['GITHUB_REF'] == 'refs/heads/main' ? f.parent.basename : '', context: f.parent}
+            {image: f.parent.parent.basename, prefix: "#{f.parent.basename}--", raw: ENV['GITHUB_REF'] == 'refs/heads/main' ? f.parent.basename : '', context: f.parent, latest: f.parent.basename}
           }
           print '::set-output name=matrix::' + {include: matrix}.to_json
         shell: ruby -r json -r pathname {0}
@@ -64,5 +64,5 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha,scope=${{ matrix.tag }}-cache
-          cache-to: type=gha,mode=max,scope=${{ matrix.tag }}-cache
+          cache-from: type=registry,ref=ghcr.io/${{ github.repository }}/${{ matrix.image }}:${{ matrix.latest }}
+          cache-to: type=inline
