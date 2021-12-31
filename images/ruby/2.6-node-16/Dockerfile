@@ -25,4 +25,4 @@ ENV LANG C.UTF-8
 WORKDIR /projects
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["tail", "-f", "/dev/null"]
+CMD ["bash", "-c", "trap : TERM INT; sleep infinity & wait"]
