@@ -30,6 +30,7 @@ A collection of Devfiles and docker images for eclipse che.
 - ghcr.io/mtsmfm/devfiles/rust
 - ghcr.io/mtsmfm/devfiles/qmk
 - ghcr.io/mtsmfm/devfiles/clojure
+- ghcr.io/mtsmfm/devfiles/idf-rust
 - ghcr.io/mtsmfm/devfiles/golang
 
 You can find all images on GitHub packages page:
