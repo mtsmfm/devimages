@@ -38,6 +38,10 @@
   "postUpgradeTasks": {
     "commands": [
       "bin/generate_files"
+    ],
+    "fileFilters": [
+      "bin/generate_files",
+      "images/**/Dockerfile"
     ]
   }
 }
