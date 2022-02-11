@@ -77,3 +77,66 @@ https://github.com/mtsmfm/devfiles/pkgs/container/devfiles
 ERB
 
 root_dir.join('README.md').write(readme_erb.result(binding))
+
+build_and_push_erb = ERB.new(<<~ERB, trim_mode: '-')
+on:
+  pull_request:
+    paths:
+      - <%= data[:dockerfile].relative_path_from(root_dir) %>
+      - <%= file.relative_path_from(root_dir) %>
+    branches:
+      - main
+  push:
+    paths:
+      - <%= data[:dockerfile].relative_path_from(root_dir) %>
+      - <%= file.relative_path_from(root_dir) %>
+    branches:
+      - main
+
+jobs:
+  build:
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: |
+            ghcr.io/${{ github.repository }}/<%= data[:image] %>
+          tags: |
+            type=raw,value=<%= data[:latest] -%>,enable=${{ endsWith(github.ref, github.event.repository.default_branch) }}
+            type=ref,event=branch,prefix=<%= data[:prefix] %>
+            type=ref,event=pr,prefix=<%= data[:prefix] %>pr-
+            type=sha,prefix=<%= data[:prefix] %>sha-
+      - uses: docker/setup-qemu-action@v1
+      - uses: docker/setup-buildx-action@v1
+      - uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v2
+        with:
+          context: <%= data[:dockerfile].parent.relative_path_from(root_dir) %>
+          platforms: linux/amd64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+ERB
+
+(root_dir.glob('images/*/Dockerfile').map {|f|
+  {dockerfile: f, image: f.parent.basename, prefix: '', latest: 'latest'}
+} + root_dir.glob('images/*/*/Dockerfile').map {|f|
+  {dockerfile: f, image: f.parent.parent.basename, prefix: "#{f.parent.basename}--", latest: f.parent.basename}
+}).each do |data|
+  name = data[:image].to_s
+  name += "--#{data[:latest]}" unless data[:latest] == 'latest'
+  file = root_dir.join(".github/workflows/build-and-push--#{name}.yaml")
+  logger.info("Writing #{file}")
+
+  FileUtils.mkdir_p(file.dirname)
+  file.write(build_and_push_erb.result(binding))
+end
