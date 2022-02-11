@@ -56,3 +56,24 @@ ruby_images = [
   dir.join('Dockerfile').write(dockerfile_erb.result(binding))
   dir.join('entrypoint.sh').write(entrypoint_erb.result(binding))
 end
+
+images = images_dir.glob('*/*/Dockerfile').map {|f| "#{f.parent.parent.basename}:#{f.parent.basename}" }
+images += images_dir.glob('*/Dockerfile').map {|f| f.parent.basename.to_s }
+
+readme_erb = ERB.new(<<~ERB, trim_mode: '-')
+# Devfiles
+
+A collection of Devfiles and docker images for eclipse che.
+
+## Images
+
+<%- images.each do |img| -%>
+- ghcr.io/mtsmfm/devfiles/<%= img %>
+<%- end -%>
+
+You can find all images on GitHub packages page:
+
+https://github.com/mtsmfm/devfiles/pkgs/container/devfiles
+ERB
+
+root_dir.join('README.md').write(readme_erb.result(binding))

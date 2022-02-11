@@ -26,7 +26,7 @@
   "regexManagers": [
     {
       "fileMatch": [
-        "^bin/generate_dockerfiles$"
+        "^bin/generate_files$"
       ],
       "matchStrings": [
         "image: '(?<depName>.*?):(?<currentValue>.*)'"
@@ -37,7 +37,7 @@
   "recreateClosed": true,
   "postUpgradeTasks": {
     "commands": [
-      "bin/generate_dockerfiles"
+      "bin/generate_files"
     ]
   }
 }
