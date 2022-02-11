@@ -1,4 +1,7 @@
 {
+  "allowedPostUpgradeCommands": [
+    "bin/generate_files"
+  ],
   "packageRules": [
     {
       "matchUpdateTypes": [
