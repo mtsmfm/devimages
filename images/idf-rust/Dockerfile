@@ -17,6 +17,8 @@ RUN mkdir -p /home/user && \
   chmod -R g=u /home /etc/passwd /etc/group /etc/shadow && \
   chmod +x /entrypoint.sh
 
+RUN chown -R 0 /opt
+
 ENV HOME /home/user
 ENV LANG C.UTF-8
 WORKDIR /projects
