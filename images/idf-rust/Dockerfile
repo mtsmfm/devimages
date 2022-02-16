@@ -17,6 +17,8 @@ RUN mkdir -p /home/user && \
   chmod -R g=u /home /etc/passwd /etc/group /etc/shadow && \
   chmod +x /entrypoint.sh
 
+RUN apt-get update && apt-get install -y linux-tools-5.4.0-77-generic hwdata
+RUN update-alternatives --install /usr/local/bin/usbip usbip /usr/lib/linux-tools/5.4.0-77-generic/usbip 20
 RUN chmod -R ugo+rw /opt
 
 ENV HOME /home/user
