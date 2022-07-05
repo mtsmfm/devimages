@@ -4,7 +4,7 @@ FROM espressif/idf-rust@sha256:4df601b805f5eb823a669119a21ef7ba0eae1eb0ab6ad32a8
 
 RUN apt-get update && apt-get install -y sudo less wget curl git
 
-ENV KUBECTL_VERSION v1.22.1
+ENV KUBECTL_VERSION v1.24.2
 RUN wget https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl -O /usr/bin/kubectl && chmod +x /usr/bin/kubectl
 
 RUN echo "ALL ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers

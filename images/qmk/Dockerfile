@@ -5,7 +5,7 @@ FROM debian:11.3
 RUN apt-get update && apt-get install -y sudo less wget curl git
 
 RUN apt-get update && apt-get install -y python3-pip && python3 -m pip install qmk && qmk setup -H /home/user/qmk_firmware -y
-ENV KUBECTL_VERSION v1.22.1
+ENV KUBECTL_VERSION v1.24.2
 RUN wget https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl -O /usr/bin/kubectl && chmod +x /usr/bin/kubectl
 
 RUN echo "ALL ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers

@@ -4,7 +4,7 @@ FROM clojure:openjdk-11-lein-2.9.6-bullseye
 
 RUN apt-get update && apt-get install -y sudo less wget curl git
 
-ENV KUBECTL_VERSION v1.22.1
+ENV KUBECTL_VERSION v1.24.2
 RUN wget https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl -O /usr/bin/kubectl && chmod +x /usr/bin/kubectl
 
 RUN echo "ALL ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers

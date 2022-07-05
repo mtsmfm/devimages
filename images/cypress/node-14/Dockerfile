@@ -26,7 +26,7 @@ RUN wget -O - https://github.com/novnc/websockify/archive/v${WEBSOCKIFY_VERSION}
   && rm -rf /novnc/websockify-${WEBSOCKIFY_VERSION}
 
 ENV DISPLAY :0
-ENV KUBECTL_VERSION v1.22.1
+ENV KUBECTL_VERSION v1.24.2
 RUN wget https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl -O /usr/bin/kubectl && chmod +x /usr/bin/kubectl
 
 RUN echo "ALL ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
