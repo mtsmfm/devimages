@@ -61,19 +61,19 @@ images = images_dir.glob('*/*/Dockerfile').map {|f| "#{f.parent.parent.basename}
 images += images_dir.glob('*/Dockerfile').map {|f| f.parent.basename.to_s }
 
 readme_erb = ERB.new(<<~ERB, trim_mode: '-')
-# Devfiles
+# Devimages
 
-A collection of Devfiles and docker images for eclipse che.
+A collection of docker images for development env.
 
 ## Images
 
 <%- images.each do |img| -%>
-- ghcr.io/mtsmfm/devfiles/<%= img %>
+- ghcr.io/mtsmfm/devimages/<%= img %>
 <%- end -%>
 
 You can find all images on GitHub packages page:
 
-https://github.com/mtsmfm/devfiles/pkgs/container/devfiles
+https://github.com/mtsmfm/devimages/pkgs/container/devimages
 ERB
 
 root_dir.join('README.md').write(readme_erb.result(binding))
