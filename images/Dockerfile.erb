@@ -39,8 +39,6 @@ RUN apt-get update && apt-get install -y python3-pip && python3 -m pip install q
 ENV KUBECTL_VERSION v1.22.1
 RUN wget https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl -O /usr/bin/kubectl && chmod +x /usr/bin/kubectl
 
-RUN wget -O- https://github.com/mtsmfm/che-cli/releases/download/0.2.0/che-cli-0.2.0-linux-amd64.tar.gz | tar -xzv -C /usr/bin && mv /usr/bin/che-cli /usr/bin/che
-
 <%- if tag == 'docker' -%>
 ENV DOCKER_CLI_VERSION 20.10.8
 RUN wget -O- https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_CLI_VERSION.tgz | tar xzv -C /tmp \
