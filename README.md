@@ -35,4 +35,4 @@ A collection of docker images for development env.
 
 You can find all images on GitHub packages page:
 
-https://github.com/mtsmfm/devimages/pkgs/container/devimages
+https://github.com/users/mtsmfm/packages?repo_name=devimages
