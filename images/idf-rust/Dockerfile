@@ -17,7 +17,6 @@ RUN mkdir -p /home/user && \
   chmod +x /entrypoint.sh
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install pkg-config libssl-dev libudev-dev -y
-RUN cargo install ldproxy espflash espmonitor cargo-espmonitor --force
 RUN chmod -R ugo+rw /opt
 
 ENV HOME /home/user
