@@ -26,9 +26,6 @@ function main() {
   x11vnc -forever -shared -noxrecord &
   /novnc/novnc/utils/novnc_proxy --vnc localhost:5900 --listen ${NOVNC_LISTEN_PORT:-6080}
 <%- end -%>
-<%- if name == 'idf-rust' -%>
-  rustup default esp
-<%- end -%>
 }
 
 main

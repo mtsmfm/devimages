@@ -21,7 +21,6 @@ function main() {
 
   sudo chown -R $(id -u) "${HOME}"
 
-  rustup default esp
 }
 
 main
