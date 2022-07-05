@@ -1,13 +1,13 @@
 on:
   pull_request:
     paths:
-      - images/node/12/Dockerfile
+      - images/node/12/**
       - .github/workflows/build-and-push--node--12.yaml
     branches:
       - main
   push:
     paths:
-      - images/node/12/Dockerfile
+      - images/node/12/**
       - .github/workflows/build-and-push--node--12.yaml
     branches:
       - main

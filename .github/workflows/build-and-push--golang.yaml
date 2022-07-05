@@ -1,13 +1,13 @@
 on:
   pull_request:
     paths:
-      - images/golang/Dockerfile
+      - images/golang/**
       - .github/workflows/build-and-push--golang.yaml
     branches:
       - main
   push:
     paths:
-      - images/golang/Dockerfile
+      - images/golang/**
       - .github/workflows/build-and-push--golang.yaml
     branches:
       - main

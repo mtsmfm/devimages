@@ -1,13 +1,13 @@
 on:
   pull_request:
     paths:
-      - images/node/16/Dockerfile
+      - images/node/16/**
       - .github/workflows/build-and-push--node--16.yaml
     branches:
       - main
   push:
     paths:
-      - images/node/16/Dockerfile
+      - images/node/16/**
       - .github/workflows/build-and-push--node--16.yaml
     branches:
       - main

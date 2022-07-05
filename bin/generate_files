@@ -82,13 +82,13 @@ build_and_push_erb = ERB.new(<<~ERB, trim_mode: '-')
 on:
   pull_request:
     paths:
-      - <%= data[:dockerfile].relative_path_from(root_dir) %>
+      - <%= data[:dockerfile].parent.relative_path_from(root_dir) %>/**
       - <%= file.relative_path_from(root_dir) %>
     branches:
       - main
   push:
     paths:
-      - <%= data[:dockerfile].relative_path_from(root_dir) %>
+      - <%= data[:dockerfile].parent.relative_path_from(root_dir) %>/**
       - <%= file.relative_path_from(root_dir) %>
     branches:
       - main

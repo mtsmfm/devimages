@@ -1,13 +1,13 @@
 on:
   pull_request:
     paths:
-      - images/clojure/Dockerfile
+      - images/clojure/**
       - .github/workflows/build-and-push--clojure.yaml
     branches:
       - main
   push:
     paths:
-      - images/clojure/Dockerfile
+      - images/clojure/**
       - .github/workflows/build-and-push--clojure.yaml
     branches:
       - main

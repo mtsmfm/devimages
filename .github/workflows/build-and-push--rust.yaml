@@ -1,13 +1,13 @@
 on:
   pull_request:
     paths:
-      - images/rust/Dockerfile
+      - images/rust/**
       - .github/workflows/build-and-push--rust.yaml
     branches:
       - main
   push:
     paths:
-      - images/rust/Dockerfile
+      - images/rust/**
       - .github/workflows/build-and-push--rust.yaml
     branches:
       - main

@@ -1,13 +1,13 @@
 on:
   pull_request:
     paths:
-      - images/qmk/Dockerfile
+      - images/qmk/**
       - .github/workflows/build-and-push--qmk.yaml
     branches:
       - main
   push:
     paths:
-      - images/qmk/Dockerfile
+      - images/qmk/**
       - .github/workflows/build-and-push--qmk.yaml
     branches:
       - main

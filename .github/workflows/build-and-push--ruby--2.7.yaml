@@ -1,13 +1,13 @@
 on:
   pull_request:
     paths:
-      - images/ruby/2.7/Dockerfile
+      - images/ruby/2.7/**
       - .github/workflows/build-and-push--ruby--2.7.yaml
     branches:
       - main
   push:
     paths:
-      - images/ruby/2.7/Dockerfile
+      - images/ruby/2.7/**
       - .github/workflows/build-and-push--ruby--2.7.yaml
     branches:
       - main

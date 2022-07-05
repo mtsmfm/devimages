@@ -1,13 +1,13 @@
 on:
   pull_request:
     paths:
-      - images/idf-rust/Dockerfile
+      - images/idf-rust/**
       - .github/workflows/build-and-push--idf-rust.yaml
     branches:
       - main
   push:
     paths:
-      - images/idf-rust/Dockerfile
+      - images/idf-rust/**
       - .github/workflows/build-and-push--idf-rust.yaml
     branches:
       - main

@@ -1,13 +1,13 @@
 on:
   pull_request:
     paths:
-      - images/cypress/node-14/Dockerfile
+      - images/cypress/node-14/**
       - .github/workflows/build-and-push--cypress--node-14.yaml
     branches:
       - main
   push:
     paths:
-      - images/cypress/node-14/Dockerfile
+      - images/cypress/node-14/**
       - .github/workflows/build-and-push--cypress--node-14.yaml
     branches:
       - main

@@ -1,13 +1,13 @@
 on:
   pull_request:
     paths:
-      - images/docker/Dockerfile
+      - images/docker/**
       - .github/workflows/build-and-push--docker.yaml
     branches:
       - main
   push:
     paths:
-      - images/docker/Dockerfile
+      - images/docker/**
       - .github/workflows/build-and-push--docker.yaml
     branches:
       - main
