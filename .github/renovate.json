@@ -1,4 +1,5 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "allowedPostUpgradeCommands": [
     "bin/generate_files"
   ],
@@ -37,5 +38,9 @@
       "datasourceTemplate": "docker"
     }
   ],
-  "recreateClosed": true
+  "recreateClosed": true,
+  "postUpgradeTasks": {
+    "commands": ["bin/generate_files"],
+    "fileFilters": ["**/*"]
+  }
 }
