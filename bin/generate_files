@@ -16,7 +16,7 @@ entrypoint_erb = ERB.new(images_dir.join('entrypoint.sh.erb').read, trim_mode: '
 FileUtils.rm_rf(images_dir.glob('*').select(&:directory?))
 
 node_images = [
-  {name: 'node', version: '18', base_image: 'node:18.20.3-bullseye'},
+  {name: 'node', version: '18', base_image: 'node:18.20.6-bullseye'},
   {name: 'node', version: '16', base_image: 'node:16.20.2-bullseye'},
   {name: 'node', version: '14', base_image: 'node:14.21.3-bullseye'},
 ]
