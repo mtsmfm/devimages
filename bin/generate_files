@@ -16,16 +16,12 @@ entrypoint_erb = ERB.new(images_dir.join('entrypoint.sh.erb').read, trim_mode: '
 FileUtils.rm_rf(images_dir.glob('*').select(&:directory?))
 
 node_images = [
-  {name: 'node', version: '18', base_image: 'node:18.20.3-bullseye'},
-  {name: 'node', version: '16', base_image: 'node:16.20.2-bullseye'},
-  {name: 'node', version: '14', base_image: 'node:14.21.3-bullseye'},
+  {name: 'node', version: '24', base_image: 'node:24.2.0-bookworm'},
+  {name: 'node', version: '22', base_image: 'node:22.16.0-bookworm'},
 ]
 
 ruby_images = [
-  {name: 'ruby', version: '3.2', base_image: 'ruby:3.2.2-bullseye'},
-  {name: 'ruby', version: '3.1', base_image: 'ruby:3.1.3-bullseye'},
-  {name: 'ruby', version: '3.0', base_image: 'ruby:3.0.3-bullseye'},
-  {name: 'ruby', version: '2.7', base_image: 'ruby:2.7.8-bullseye'},
+  {name: 'ruby', version: '3.4', base_image: 'ruby:3.4.4-bookworm'},
 ]
 
 [
