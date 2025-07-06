@@ -4,7 +4,7 @@ FROM node:24.3.0-bookworm
 
 RUN deluser --remove-home node
 
-RUN apt-get update && apt-get install -y sudo less wget curl git
+RUN apt-get update && apt-get install -y sudo less wget curl git jq ripgrep
 
 ENV KUBECTL_VERSION v1.24.2
 RUN wget https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl -O /usr/bin/kubectl && chmod +x /usr/bin/kubectl

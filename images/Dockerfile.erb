@@ -9,7 +9,7 @@ USER root
 RUN deluser --remove-home node
 
 <%- end -%>
-RUN apt-get update && apt-get install -y sudo less wget curl git
+RUN apt-get update && apt-get install -y sudo less wget curl git jq ripgrep
 
 <%- if node_version -%>
 RUN apt-get update && curl -fsSL https://deb.nodesource.com/setup_<%= node_version %>.x | bash - \

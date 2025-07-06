@@ -3,7 +3,7 @@
 FROM espressif/idf-rust:esp32_v4.4_1.61.0.0
 
 USER root
-RUN apt-get update && apt-get install -y sudo less wget curl git
+RUN apt-get update && apt-get install -y sudo less wget curl git jq ripgrep
 
 ENV KUBECTL_VERSION v1.24.2
 RUN wget https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl -O /usr/bin/kubectl && chmod +x /usr/bin/kubectl
