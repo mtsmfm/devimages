@@ -21,7 +21,7 @@ node_images = [
 ]
 
 ruby_images = [
-  {name: 'ruby', version: '3.4', base_image: 'ruby:3.4.4-bookworm'},
+  {name: 'ruby', version: '3.4', base_image: 'ruby:3.4.5-bookworm'},
 ]
 
 [
