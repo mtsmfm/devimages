@@ -33,7 +33,7 @@ ruby_images = [
   *node_images.map {|node|
     node.merge(name: 'cypress', tag: 'node-' + node[:version])
   },
-  {name: 'rust', base_image: 'rust:1.89.0-bullseye'},
+  {name: 'rust', base_image: 'rust:1.90.0-bullseye'},
   {name: 'golang', base_image: 'golang:1.24.6-bullseye'},
   {name: 'clojure', base_image: 'clojure:openjdk-11-lein-2.9.6-bullseye'},
   {name: 'docker', base_image: 'debian:11.11'},
